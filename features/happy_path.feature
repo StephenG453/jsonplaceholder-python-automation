@@ -34,9 +34,14 @@
 # print(response.json())
 # print(response.status_code)
 
-Feature: Test CRUD methods
+Feature: Test jsonplaceholder API
 
   Background:
     Given user sets API URL
 
-  Scenario:
+  Scenario: Happy path scenario of creating and delete an entity post
+    Given user sets API URL
+    When user defines post request body
+      | userid | title        | body        |
+      | 100    | test title 1 | test body 1 |
+    When user sends a valid post http request
