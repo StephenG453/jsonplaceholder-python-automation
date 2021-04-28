@@ -49,6 +49,19 @@ def get_entity(context):
     assert response.status_code == 200
 
 
-@step('user deleted the created entity')
-def get_entity(context):
+@step('user deletes the created entity')
+def delete_entity(context):
+    # would use response_id but its not actually created, so we will get 404
+    # global response_id
 
+    response = requests.delete('https://jsonplaceholder.typicode.com/posts/' + str(1))
+
+    assert response.status_code == 200
+
+
+@step('entity is not able to be retrieved')
+def get_entity(context):
+    global response_id
+    response = requests.get('https://jsonplaceholder.typicode.com/posts/' + str(response_id))
+
+    assert response.status_code == 404

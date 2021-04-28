@@ -46,3 +46,5 @@ Feature: Test jsonplaceholder API
       | 100    | test title 1 | test body 1 |
     And user sends a valid POST http request
     And user gets the created entity
+    And user deletes the created entity
+    Then entity is not able to be retrieved
