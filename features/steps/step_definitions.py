@@ -6,6 +6,8 @@ api_url = None
 
 post_request_body = {}
 
+response_id = None
+
 
 @given('user sets API URL')
 def set_url(context):
@@ -27,8 +29,26 @@ def define_post_body(context):
                              'userId': row['userid']}
 
 
-@when('user sends a valid post http request')
+@step('user sends a valid POST http request')
 def add_post(context):
     response = requests.post('https://jsonplaceholder.typicode.com/posts', post_request_body)
 
+    global response_id
+    response_id = response.json()['id']
+
     assert response.status_code == 201
+
+
+@step('user gets the created entity')
+def get_entity(context):
+    # would use response_id but its not actually created, so we will get 404
+    # global response_id
+
+    response = requests.get('https://jsonplaceholder.typicode.com/posts/' + str(1))
+
+    assert response.status_code == 200
+
+
+@step('user deleted the created entity')
+def get_entity(context):
+

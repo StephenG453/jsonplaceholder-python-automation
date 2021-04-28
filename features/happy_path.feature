@@ -44,4 +44,5 @@ Feature: Test jsonplaceholder API
     When user defines post request body
       | userid | title        | body        |
       | 100    | test title 1 | test body 1 |
-    When user sends a valid post http request
+    And user sends a valid POST http request
+    And user gets the created entity
